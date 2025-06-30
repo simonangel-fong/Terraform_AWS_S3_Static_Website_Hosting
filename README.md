@@ -30,27 +30,7 @@ terraform init
 | `aws_region`           | AWS region where S3 bucket will be created. |
 | `cloudflare_api_token` | Token for Cloudflare API access.            |
 
----
-
-## Outline
-
-**AWS S3 Steps**
-
-1. Create S3 Bucket
-
-- Provision an AWS S3 bucket configured for static website hosting.
-
-2. Upload Static Website Files
-
-- Use Terraform to upload required static files to the S3 bucket.
-
-3. Enable Static Website Hosting
-
-- Configure the S3 bucket for static website hosting.
-
-4. Configure Bucket Policy
-
-- Define access policies to control permissions for the S3 bucket.
+3. Apply
 
 ```sh
 terraform apply --auto-approve
@@ -58,13 +38,21 @@ terraform apply --auto-approve
 terraform destroy --auto-approve
 ```
 
-![pic](./screenshot01.png)
-
 ---
 
-**Cloudflare step**
+## How does it work?
 
-- Update DNS with Cloudflare
+1. **Create S3 Bucket**: Provision an AWS S3 bucket configured for static website hosting.
+
+2. **Upload Static Website Files**: Use Terraform to upload required static files to the S3 bucket.
+
+3. **Enable Static Website Hosting**: Configure the S3 bucket for static website hosting.
+
+4. **Configure Bucket Policy**: Define access policies to control permissions for the S3 bucket.
+
+![pic](./screenshot01.png)
+
+5. **Update DNS with Cloudflare**
 
 ![pic](./screenshot02.png)
 
@@ -72,9 +60,10 @@ terraform destroy --auto-approve
 
 ## Benefit
 
-- **Automation**:
+- **Automation**
 
-  - Simplifies infrastructure deployment through **automated workflows**, minimizing manual effort and ensuring uniformity **across environments**.
+Simplifies infrastructure deployment through **automated workflows**, minimizing manual effort and ensuring uniformity **across environments**.
 
-- **Ease of Use**:
-  - Requires only `AWS` and `Cloudflare` access, with **customization** of web hosting requiring just four arguments.
+- **Ease of Use**
+
+Requires only `AWS` and `Cloudflare` access, with **customization** of web hosting requiring just four arguments.
