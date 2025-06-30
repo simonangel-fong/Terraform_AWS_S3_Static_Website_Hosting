@@ -3,12 +3,12 @@
 # ########################################
 
 resource "aws_s3_bucket" "web_host_bucket" {
-  #   bucket = "${var.domain_name}-${random_string.bucket_suffix.result}"
-  bucket = var.domain_name
+  #   bucket = "${var.web_domain_name}-${random_string.bucket_suffix.result}"
+  bucket = "${var.web_subdomain_name}.${var.web_domain_name}"
 
   tags = {
-    # Name = "bucket-${var.domain_name}-${random_string.bucket_suffix.result}"
-    Name = "bucket-${var.domain_name}"
+    # Name = "bucket-${var.web_domain_name}-${random_string.bucket_suffix.result}"
+    Name = "bucket-${var.web_domain_name}"
   }
 }
 
@@ -115,7 +115,7 @@ resource "aws_s3_bucket_policy" "example" {
         "Effect" : "Allow",
         "Principal" : "*",
         "Action" : "s3:GetObject",
-        "Resource" : "arn:aws:s3:::${var.domain_name}/*"
+        "Resource" : "arn:aws:s3:::${aws_s3_bucket.web_host_bucket.id}/*"
       }
     ]
   })
