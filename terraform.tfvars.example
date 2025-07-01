@@ -1,0 +1,7 @@
+# terraform.tfvars.example
+
+# AWS region
+region = "us-east-1"
+
+# App name
+app_name = "my-web-app"
