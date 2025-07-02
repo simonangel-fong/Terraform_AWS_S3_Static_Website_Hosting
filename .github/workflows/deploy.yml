@@ -23,6 +23,7 @@ jobs:
       TF_VAR_web_domain_name: ${{ secrets.WEB_DOMAIN_NAME }}
       TF_VAR_web_subdomain_name: ${{ secrets.WEB_SUBDOMAIN_NAME }}
       TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      TF_VAR_cloudflare_zone_id: ${{ secrets.CLOUDFLARE_ZONE_ID }}
 
     steps:
       - name: Checkout code
@@ -47,10 +48,10 @@ jobs:
         run: terraform validate
 
       # - name: Terraform Plan
-        # run: terraform plan
+      # run: terraform plan
 
       - run: terraform apply -auto-approve
       # - name: Terraform Apply
       #   run: terraform apply -auto-approve
-        # env:
-        #     TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      # env:
+      #     TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
