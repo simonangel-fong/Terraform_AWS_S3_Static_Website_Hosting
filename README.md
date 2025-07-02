@@ -18,7 +18,8 @@ An **Infrastructure as Code (IaC)** solution to host a static website on **AWS S
 ```sh
 aws configure
 cd terraform
-terraform init
+
+terraform init -backend-config="./state.config"
 ```
 
 2. Create and input variables in `terraform.tfvars`

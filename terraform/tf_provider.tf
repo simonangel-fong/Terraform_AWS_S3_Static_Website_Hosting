@@ -12,11 +12,11 @@ terraform {
   }
 
   # Configuring a remote backend
-  # backend "s3" {
-  #   bucket = ""
-  #   region = ""
-  #   key    = ""
-  # }
+  backend "s3" {
+    bucket = ""
+    region = ""
+    key    = ""
+  }
 }
 
 provider "aws" {
