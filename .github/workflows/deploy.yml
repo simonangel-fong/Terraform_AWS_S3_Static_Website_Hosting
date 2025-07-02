@@ -17,7 +17,6 @@ jobs:
   plan:
     name: Terraform plan
     runs-on: ubuntu-latest
-    continue-on-error: true
     defaults:
       run:
         shell: bash
@@ -66,3 +65,10 @@ jobs:
       - name: Terraform plan
         id: plan
         run: terraform plan -no-color
+        continue-on-error: true
+
+      - name: Terraform apply
+        id: apply
+        # Only apply on direct pushes to master (not PRs or manual triggers)
+        # if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: terraform apply -auto-approve
