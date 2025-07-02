@@ -1,7 +1,9 @@
 name: Deploy Terraform
 
 on:
-  pull_request:
+  push:
+    branches:
+      - main
 
 env:
   TF_WORKSPACE: "terraform-github-actions"
