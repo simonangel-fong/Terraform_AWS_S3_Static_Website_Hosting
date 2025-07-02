@@ -11,11 +11,11 @@ terraform {
     }
   }
 
-  # # Configuring a remote backend
+  # Configuring a remote backend
   # backend "s3" {
-  #   bucket = "your_s3_backend_bucket"
-  #   region = "your_s3_backend_bucket_region"
-  #   key    = "your_s3_backend_bucket_prefix/terraform.tfstate"
+  #   bucket = ""
+  #   region = ""
+  #   key    = ""
   # }
 }
 

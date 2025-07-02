@@ -71,3 +71,11 @@ Simplifies infrastructure deployment through **automated workflows**, minimizing
 Requires only `AWS` and `Cloudflare` access, with **customization** of web hosting requiring just four arguments.
 
 - integrate CICD
+
+
+terraform init -backend-config="bucket=${{ secrets.AWS_BACKEND_BUCKET }}"
+
+
+    bucket = ""
+    region = ""
+    key    = ""
