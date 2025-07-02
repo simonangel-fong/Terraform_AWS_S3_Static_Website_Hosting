@@ -1,4 +1,4 @@
-name: "Terraform Plan"
+name: "Terraform Deploy"
 
 on:
   push:
@@ -15,7 +15,7 @@ on:
 
 jobs:
   plan:
-    name: Terraform plan
+    name: Terraform Deploy
     runs-on: ubuntu-latest
     defaults:
       run:

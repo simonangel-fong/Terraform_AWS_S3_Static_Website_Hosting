@@ -1,6 +1,6 @@
 # Terraform Project: Enable Static Website Hosting on AWS S3
 
-An **Infrastructure as Code (IaC)** solution to host a static website on **AWS S3** and update **Cloudflare** domain settings using Terraform.
+An `Infrastructure as Code (IaC)` solution to host a static website on `AWS S3` and update `Cloudflare` domain settings using `Terraform`.
 
 ---
 
@@ -19,22 +19,22 @@ An **Infrastructure as Code (IaC)** solution to host a static website on **AWS S
 aws configure
 ```
 
-2. Create configuration file `state.config` and add variables
+2. Create configuration file `state.config` and add variables. See example file: `terraform/state.config.example`
 
-| Variable | Description                  |
-| -------- | ---------------------------- |
-| `bucket` | S3 bucket name for backend   |
-| `key`    | S3 bucket key for backend    |
-| `region` | S3 bucket region for backend |
+| Variable | Description                                              |
+| -------- | -------------------------------------------------------- |
+| `bucket` | S3 bucket name for storing Terraform state (pre-created) |
+| `key`    | S3 object key for the state file                         |
+| `region` | AWS region where the state bucket is located             |
 
-3. Initialize Terraform
+1. Initialize Terraform
 
 ```sh
 cd terraform
 terraform init -backend-config="./state.config"
 ```
 
-4. Create and input variables in `terraform.tfvars`
+4. Create and input variables in `terraform.tfvars`. See example file: `terraform/terraform.tfvars.example`
 
 | Variable               | Description                                    |
 | ---------------------- | ---------------------------------------------- |
@@ -46,13 +46,18 @@ terraform init -backend-config="./state.config"
 
 5. Create website in `web` directory
 
+Place static website files (HTML, CSS, JS) in the web/ directory at the project root.
+
 6. Deploy website
 
 ```sh
-# apply with env var
+# Plan and review changes
+terraform plan
+
+# Apply infrastructure changes
 terraform apply -auto-approve
 
-# destroy
+# Destroy infrastructure when no longer needed
 terraform destroy -auto-approve
 ```
 
@@ -88,30 +93,32 @@ Requires only `AWS` and `Cloudflare` access, with **customization** of web hosti
 
 ## Advanced - GitHub Actions
 
-- Configure variable for Provider
+### Configure Variable
 
-| Variable                | Description |
-| ----------------------- | ----------- |
-| `AWS_ACCESS_KEY_ID`     |             |
-| `AWS_SECRET_ACCESS_KEY` |             |
-| `AWS_REGION`            |             |
-| `CLOUDFLARE_API_TOKEN`  |             |
-| `CLOUDFLARE_ZONE_ID`    |             |
+- Provider Configuration
 
-- Configure variable for Terraform S3 backend
+| Variable                | Description                                |
+| ----------------------- | ------------------------------------------ |
+| `AWS_ACCESS_KEY_ID`     | AWS access key ID for Terraform operations |
+| `AWS_SECRET_ACCESS_KEY` | AWS secret access key                      |
+| `AWS_REGION`            | Default AWS region for resource creation   |
+| `CLOUDFLARE_API_TOKEN`  | Cloudflare API token with Zone:Edit perms  |
+| `CLOUDFLARE_ZONE_ID`    | Cloudflare zone ID for DNS management      |
 
-| Variable                    | Description |
-| --------------------------- | ----------- |
-| `AWS_BACKEND_BUCKET`        |             |
-| `AWS_BACKEND_BUCKET_KEY`    |             |
-| `AWS_BACKEND_BUCKET_REGION` |             |
+- Terraform S3 Backend Configuration
 
-- Configure variable for Application
+| Variable                    | Description                              |
+| --------------------------- | ---------------------------------------- |
+| `AWS_BACKEND_BUCKET`        | S3 bucket name for Terraform state       |
+| `AWS_BACKEND_BUCKET_KEY`    | S3 key path for state file storage       |
+| `AWS_BACKEND_BUCKET_REGION` | AWS region of the Terraform state bucket |
 
-| Variable          | Description |
-| ----------------- | ----------- |
-| `APP_NAME`        |             |
-| `APP_DOMAIN_NAME` |             |
+- Application Configuration
+
+| Variable          | Description                               |
+| ----------------- | ----------------------------------------- |
+| `APP_NAME`        | Application name used as subdomain prefix |
+| `APP_DOMAIN_NAME` | Primary domain name for the website       |
 
 - Key command:
 
@@ -122,3 +129,15 @@ terraform init \
   -backend-config="region=${{ secrets.AWS_BACKEND_BUCKET_REGION }}" \
   -backend-config="encrypt=true"
 ```
+
+---
+
+### Resource Control
+
+Control Terraform operations using the `.terraform-action` file.
+
+| File content | Description                             | Action Taken        |
+| ------------ | --------------------------------------- | ------------------- |
+| `apply`      | Deploy/update infrastructure resources  | `terraform apply`   |
+| `destroy`    | Remove all provisioned infrastructure   | `terraform destroy` |
+| Any other    | Invalid - workflow will fail with error | No action           |
