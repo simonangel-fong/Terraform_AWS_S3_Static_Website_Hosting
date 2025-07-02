@@ -29,13 +29,15 @@ terraform init
 | `sub_domain_name`      | Sub-domain name for hosting purposes.       |
 | `aws_region`           | AWS region where S3 bucket will be created. |
 | `cloudflare_api_token` | Token for Cloudflare API access.            |
+| `cloudflare_zone_id`   | The Cloudflare zone id.                     |
 
-3. Apply
+1. Apply
 
 ```sh
-terraform apply --auto-approve
+# apply with env var
+terraform apply -var-file="terraform.tfvars" -auto-approve
 
-terraform destroy --auto-approve
+terraform destroy -var-file="terraform.tfvars" -auto-approve
 ```
 
 ---
@@ -49,8 +51,6 @@ terraform destroy --auto-approve
 3. **Enable Static Website Hosting**: Configure the S3 bucket for static website hosting.
 
 4. **Configure Bucket Policy**: Define access policies to control permissions for the S3 bucket.
-
-![pic](./screenshot01.png)
 
 5. **Update DNS with Cloudflare**
 

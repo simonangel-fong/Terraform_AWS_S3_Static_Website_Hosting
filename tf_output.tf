@@ -19,5 +19,5 @@ output "aws_website_endpoint" {
 # Output the Cloudflare-proxied URL
 output "cloudflare_hsotname" {
   description = "Website URL through Cloudflare"
-  value       = cloudflare_record.cf_record.hostname 
+  value       = "https://${cloudflare_record.cf_record.hostname}/"
 }
