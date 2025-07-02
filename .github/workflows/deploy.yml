@@ -12,7 +12,7 @@ env:
 jobs:
   plan:
     name: Terraform plan
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     env:
       TF_WORKSPACE: "terraform-github-actions"
