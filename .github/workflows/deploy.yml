@@ -47,7 +47,7 @@ jobs:
           pwd
           ls -al
           if [ -f ".terraform-action" ]; then
-            ACTION=$(cat ../.terraform-action | tr -d '\n\r')
+            ACTION=$(cat .terraform-action | tr -d '\n\r')
             echo "action=$ACTION" >> $GITHUB_OUTPUT
           else
             echo "action=plan" >> $GITHUB_OUTPUT
