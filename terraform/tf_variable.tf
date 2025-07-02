@@ -7,7 +7,7 @@ variable "app_name" {
   type        = string
 }
 
-variable "web_domain_name" {
+variable "app_domain_name" {
   description = "Application domain name"
   type        = string
 }

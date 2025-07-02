@@ -70,12 +70,41 @@ Simplifies infrastructure deployment through **automated workflows**, minimizing
 
 Requires only `AWS` and `Cloudflare` access, with **customization** of web hosting requiring just four arguments.
 
-- integrate CICD
+---
 
+## Advanced - GitHub Actions
 
-terraform init -backend-config="bucket=${{ secrets.AWS_BACKEND_BUCKET }}"
+- Configure variable for Provider
 
+| Variable                | Description |
+| ----------------------- | ----------- |
+| `AWS_ACCESS_KEY_ID`     |             |
+| `AWS_SECRET_ACCESS_KEY` |             |
+| `AWS_REGION`            |             |
+| `CLOUDFLARE_API_TOKEN`  |             |
+| `CLOUDFLARE_ZONE_ID`    |             |
 
-    bucket = ""
-    region = ""
-    key    = ""
+- Configure variable for Terraform S3 backend
+
+| Variable                    | Description |
+| --------------------------- | ----------- |
+| `AWS_BACKEND_BUCKET`        |             |
+| `AWS_BACKEND_BUCKET_KEY`    |             |
+| `AWS_BACKEND_BUCKET_REGION` |             |
+
+- Configure variable for Application
+
+| Variable          | Description |
+| ----------------- | ----------- |
+| `APP_NAME`        |             |
+| `APP_DOMAIN_NAME` |             |
+
+- Key command:
+
+```sh
+terraform init \
+  -backend-config="bucket=${{ secrets.AWS_BACKEND_BUCKET }}" \
+  -backend-config="key=${{ secrets.AWS_BACKEND_BUCKET_KEY }}" \
+  -backend-config="region=${{ secrets.AWS_BACKEND_BUCKET_REGION }}" \
+  -backend-config="encrypt=true"
+```

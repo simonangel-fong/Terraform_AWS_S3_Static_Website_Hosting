@@ -3,12 +3,12 @@
 # ########################################
 
 resource "aws_s3_bucket" "web_host_bucket" {
-  #   bucket = "${var.web_domain_name}-${random_string.bucket_suffix.result}"
-  bucket = "${var.app_name}.${var.web_domain_name}"
+  #   bucket = "${var.app_domain_name}-${random_string.bucket_suffix.result}"
+  bucket = "${var.app_name}.${var.app_domain_name}"
 
   tags = {
-    # Name = "bucket-${var.web_domain_name}-${random_string.bucket_suffix.result}"
-    Name = "bucket-${var.web_domain_name}"
+    # Name = "bucket-${var.app_domain_name}-${random_string.bucket_suffix.result}"
+    Name = "bucket-${var.app_domain_name}"
   }
 }
 
