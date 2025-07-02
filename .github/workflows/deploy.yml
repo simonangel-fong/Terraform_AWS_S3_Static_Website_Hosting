@@ -44,6 +44,8 @@ jobs:
       - name: Read Terraform Action
         id: action
         run: |
+          pwd
+          ls
           if [ -f ".terraform-action" ]; then
             ACTION=$(cat ../.terraform-action | tr -d '\n\r')
             echo "action=$ACTION" >> $GITHUB_OUTPUT
