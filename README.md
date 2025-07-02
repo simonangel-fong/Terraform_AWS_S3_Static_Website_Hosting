@@ -27,11 +27,11 @@ aws configure
 | `key`    | S3 object key for the state file                         |
 | `region` | AWS region where the state bucket is located             |
 
-1. Initialize Terraform
+3. Initialize Terraform
 
 ```sh
 cd terraform
-terraform init -backend-config="./state.config"
+terraform init -backend-config="./state.config" -migrate-state
 ```
 
 4. Create and input variables in `terraform.tfvars`. See example file: `terraform/terraform.tfvars.example`
