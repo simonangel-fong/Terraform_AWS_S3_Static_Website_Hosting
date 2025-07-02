@@ -41,6 +41,16 @@ jobs:
       - name: Checkout the repository to the runner
         uses: actions/checkout@v4
 
+      - name: Read Terraform Action
+        id: action
+        run: |
+          if [ -f "../.terraform-action" ]; then
+            ACTION=$(cat ../.terraform-action | tr -d '\n\r')
+            echo "action=$ACTION" >> $GITHUB_OUTPUT
+          else
+            echo "action=plan" >> $GITHUB_OUTPUT
+          fi
+
       - name: Setup Terraform with specified version on the runner
         uses: hashicorp/setup-terraform@v3
         with:
@@ -67,8 +77,16 @@ jobs:
         run: terraform plan -no-color
         continue-on-error: true
 
-      - name: Terraform apply
-        id: apply
-        # Only apply on direct pushes to master (not PRs or manual triggers)
-        # if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      - name: Terraform Apply
+        if: |
+          github.ref == 'refs/heads/master' && 
+          github.event_name == 'push' && 
+          steps.action.outputs.action == 'apply'
         run: terraform apply -auto-approve
+
+      - name: Terraform Destroy
+        if: |
+          github.ref == 'refs/heads/master' && 
+          github.event_name == 'push' && 
+          steps.action.outputs.action == 'destroy'
+        run: terraform destroy -auto-approve
