@@ -34,7 +34,7 @@ resource "aws_s3_bucket_versioning" "bucket_versioning" {
 module "template_files" {
   source = "hashicorp/dir/template"
 
-  base_dir = "${path.module}/web"
+  base_dir = "${path.module}/../web"
 }
 
 # update S3 object resource for hosting bucket files

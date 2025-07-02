@@ -17,7 +17,7 @@ An **Infrastructure as Code (IaC)** solution to host a static website on **AWS S
 
 ```sh
 aws configure
-
+cd terraform
 terraform init
 ```
 
@@ -52,7 +52,7 @@ terraform destroy -var-file="terraform.tfvars" -auto-approve
 
 4. **Configure Bucket Policy**: Define access policies to control permissions for the S3 bucket.
 
-5. **Update DNS with Cloudflare** 
+5. **Update DNS with Cloudflare**
 
 ![pic](./screenshot02.png)
 
