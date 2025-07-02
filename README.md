@@ -13,16 +13,28 @@ An **Infrastructure as Code (IaC)** solution to host a static website on **AWS S
 
 ## Usage
 
-1. Configure AWS CLI and Initialize Terraform
+1. Configure AWS CLI
 
 ```sh
 aws configure
-cd terraform
+```
 
+2. Create configuration file `state.config` and add variables
+
+| Variable | Description                  |
+| -------- | ---------------------------- |
+| `bucket` | S3 bucket name for backend   |
+| `key`    | S3 bucket key for backend    |
+| `region` | S3 bucket region for backend |
+
+3. Initialize Terraform
+
+```sh
+cd terraform
 terraform init -backend-config="./state.config"
 ```
 
-2. Create and input variables in `terraform.tfvars`
+4. Create and input variables in `terraform.tfvars`
 
 | Variable               | Description                                    |
 | ---------------------- | ---------------------------------------------- |
@@ -32,14 +44,15 @@ terraform init -backend-config="./state.config"
 | `cloudflare_api_token` | Cloudflare API Token.                          |
 | `cloudflare_zone_id`   | Cloudflare zone id of the domain name.         |
 
-3. Create website in `web` directory
+5. Create website in `web` directory
 
-4. Deploy website
+6. Deploy website
 
 ```sh
 # apply with env var
 terraform apply -auto-approve
 
+# destroy
 terraform destroy -auto-approve
 ```
 
@@ -57,7 +70,7 @@ terraform destroy -auto-approve
 
 5. **Update DNS with Cloudflare**
 
-![pic](./screenshot02.png)
+![pic](./doc/deploy.png)
 
 ---
 

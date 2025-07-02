@@ -1,0 +1,4 @@
+# state.config
+bucket = "your_backend_s3_bucket" 
+key    = "your_backend_s3_bucket_key" # example: "app_name/terraform.tfstate"
+region = "your_backend_s3_bucket_region"

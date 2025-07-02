@@ -71,4 +71,4 @@ jobs:
         id: apply
         # Only apply on direct pushes to master (not PRs or manual triggers)
         # if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-        run: terraform apply -auto-approve
+        run: terraform destroy -auto-approve
