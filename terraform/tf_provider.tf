@@ -13,12 +13,11 @@ terraform {
 
   # # Configuring a remote backend
   # backend "s3" {
-  #   bucket = var.aws_tf_backend
-  #   key    = var.aws_tf_backend_key
-  #   region = var.aws_tf_backend_region
+  #   bucket = "your_s3_backend_bucket"
+  #   region = "your_s3_backend_bucket_region"
+  #   key    = "your_s3_backend_bucket_prefix/terraform.tfstate"
   # }
 }
-
 
 provider "aws" {
   region = var.aws_region

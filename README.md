@@ -21,23 +21,25 @@ cd terraform
 terraform init
 ```
 
-2. Update Variables in `tf_variable.tf`
+2. Create and input variables in `terraform.tfvars`
 
-| Variable               | Description                                 |
-| ---------------------- | ------------------------------------------- |
-| `web_domain_name`      | Main domain name for DNS records.           |
-| `sub_domain_name`      | Sub-domain name for hosting purposes.       |
-| `aws_region`           | AWS region where S3 bucket will be created. |
-| `cloudflare_api_token` | Token for Cloudflare API access.            |
-| `cloudflare_zone_id`   | The Cloudflare zone id.                     |
+| Variable               | Description                                    |
+| ---------------------- | ---------------------------------------------- |
+| `app_name`             | Application name, also used as subdomain name. |
+| `domain_name`          | Domain name hosted on Cloudflare.              |
+| `aws_region`           | AWS region to provision resources.             |
+| `cloudflare_api_token` | Cloudflare API Token.                          |
+| `cloudflare_zone_id`   | Cloudflare zone id of the domain name.         |
 
-1. Apply
+3. Create website in `web` directory
+
+4. Deploy website
 
 ```sh
 # apply with env var
-terraform apply -var-file="terraform.tfvars" -auto-approve
+terraform apply -auto-approve
 
-terraform destroy -var-file="terraform.tfvars" -auto-approve
+terraform destroy -auto-approve
 ```
 
 ---
@@ -67,3 +69,5 @@ Simplifies infrastructure deployment through **automated workflows**, minimizing
 - **Ease of Use**
 
 Requires only `AWS` and `Cloudflare` access, with **customization** of web hosting requiring just four arguments.
+
+- integrate CICD

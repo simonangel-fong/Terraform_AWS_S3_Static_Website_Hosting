@@ -2,14 +2,14 @@
 # Web variables
 # ########################################
 
-variable "web_domain_name" {
+variable "app_name" {
+  description = "Application name"
   type        = string
-  description = "Domain name for application"
 }
 
-variable "web_subdomain_name" {
+variable "web_domain_name" {
+  description = "Application domain name"
   type        = string
-  description = "Sub domain name for application"
 }
 
 # ########################################
@@ -17,8 +17,8 @@ variable "web_subdomain_name" {
 # ########################################
 
 variable "aws_region" {
+  description = "AWS region code to prosision resources"
   type        = string
-  description = "AWS region code where resources will be provisioned"
 }
 
 # ########################################

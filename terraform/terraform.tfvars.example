@@ -1,6 +1,7 @@
 # terraform.tfvars.example
 
-web_domain_name      = "example.com"
-web_subdomain_name   = "www"
-aws_region           = "us-east-1"
-cloudflare_api_token = "REPLACE_WITH_SECRET" # should not be committed
+app_name             = "my_app"
+web_domain_name      = "my_domain"
+aws_region           = "my_region"
+cloudflare_api_token = "cloudfalre_token"
+cloudflare_zone_id   = "zone_id"
