@@ -3,9 +3,9 @@ name: "Terraform Plan"
 on:
   push:
     branches: [master]
-    paths:
-      - terraform/**
-      - web/**
+    # paths:
+    #   - terraform/**
+    #   - web/**
   pull_request:
     branches: [master]
     paths:
