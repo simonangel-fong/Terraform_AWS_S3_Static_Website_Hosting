@@ -2,8 +2,8 @@ name: "Terraform Plan"
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
 
 env:
   TF_WORKSPACE: "terraform-github-actions"
