@@ -9,6 +9,7 @@ An `Infrastructure as Code (IaC)` solution to host a static website on `AWS S3` 
 ## Prerequisites
 
 - AWS CLI access key with appropriate permissions.
+- An valid certificate has been imported to Certificate Manager.
 - Cloudflare API token for DNS management.
 
 ---
@@ -48,7 +49,7 @@ terraform init -backend-config="./state.config" -migrate-state
 | `cloudflare_api_token` | Cloudflare API Token.                  |
 | `cloudflare_zone_id`   | Cloudflare zone id of the domain name. |
 
-1. Create website in `web` directory
+5. Create website in `web` directory
 
 Place static website files (HTML, CSS, JS) in the web/ directory at the project root.
 
