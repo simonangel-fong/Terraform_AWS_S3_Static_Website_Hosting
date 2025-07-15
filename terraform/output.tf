@@ -1,15 +1,11 @@
 # ########################################
-# aws bucket
+# AWS
 # ########################################
 
-output "aws_bucket_name" {
-  description = "Name of the S3 bucket"
-  value       = aws_s3_bucket.web_host_bucket.id
-}
-
-output "aws_website_endpoint" {
-  description = "Website endpoint for the S3 bucket"
-  value       = aws_s3_bucket_website_configuration.website_config.website_endpoint
+# bucket
+output "aws_cloudfront_domain" {
+  description = "Website endpoint of cloudfront"
+  value       = "https://${aws_cloudfront_distribution.cloudfront_distribution.domain_name}"
 }
 
 # ########################################

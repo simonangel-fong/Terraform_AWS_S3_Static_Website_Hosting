@@ -2,6 +2,8 @@
 
 An `Infrastructure as Code (IaC)` solution to host a static website on `AWS S3` and update `Cloudflare` domain settings using `Terraform`.
 
+![diagram](webhost_diagram.gif)
+
 ---
 
 ## Prerequisites
@@ -36,15 +38,17 @@ terraform init -backend-config="./state.config" -migrate-state
 
 4. Create and input variables in `terraform.tfvars`. See example file: `terraform/terraform.tfvars.example`
 
-| Variable               | Description                                    |
-| ---------------------- | ---------------------------------------------- |
-| `app_name`             | Application name, also used as subdomain name. |
-| `domain_name`          | Domain name hosted on Cloudflare.              |
-| `aws_region`           | AWS region to provision resources.             |
-| `cloudflare_api_token` | Cloudflare API Token.                          |
-| `cloudflare_zone_id`   | Cloudflare zone id of the domain name.         |
+| Variable               | Description                            |
+| ---------------------- | -------------------------------------- |
+| `app_name`             | Application name.                      |
+| `web_domain`           | Static web domain name.                |
+| `web_subdomain`        | Static web subdomain name.             |
+| `aws_region`           | AWS region to provision resources.     |
+| `aws_acm_cert_arn`     | AWS acm certificate arn.               |
+| `cloudflare_api_token` | Cloudflare API Token.                  |
+| `cloudflare_zone_id`   | Cloudflare zone id of the domain name. |
 
-5. Create website in `web` directory
+1. Create website in `web` directory
 
 Place static website files (HTML, CSS, JS) in the web/ directory at the project root.
 
@@ -75,7 +79,7 @@ terraform destroy -auto-approve
 
 5. **Update DNS with Cloudflare**
 
-![pic](./doc/deploy.png)
+![pic](./deploy.png)
 
 ---
 
@@ -95,6 +99,14 @@ Requires only `AWS` and `Cloudflare` access, with **customization** of web hosti
 
 ### Configure Variable
 
+- Terraform S3 Backend Configuration
+
+| Variable                    | Description                              |
+| --------------------------- | ---------------------------------------- |
+| `AWS_BACKEND_BUCKET`        | S3 bucket name for Terraform state       |
+| `AWS_BACKEND_BUCKET_KEY`    | S3 key path for state file storage       |
+| `AWS_BACKEND_BUCKET_REGION` | AWS region of the Terraform state bucket |
+
 - Provider Configuration
 
 | Variable                | Description                                |
@@ -105,20 +117,14 @@ Requires only `AWS` and `Cloudflare` access, with **customization** of web hosti
 | `CLOUDFLARE_API_TOKEN`  | Cloudflare API token with Zone:Edit perms  |
 | `CLOUDFLARE_ZONE_ID`    | Cloudflare zone ID for DNS management      |
 
-- Terraform S3 Backend Configuration
-
-| Variable                    | Description                              |
-| --------------------------- | ---------------------------------------- |
-| `AWS_BACKEND_BUCKET`        | S3 bucket name for Terraform state       |
-| `AWS_BACKEND_BUCKET_KEY`    | S3 key path for state file storage       |
-| `AWS_BACKEND_BUCKET_REGION` | AWS region of the Terraform state bucket |
-
 - Application Configuration
 
-| Variable          | Description                               |
-| ----------------- | ----------------------------------------- |
-| `APP_NAME`        | Application name used as subdomain prefix |
-| `APP_DOMAIN_NAME` | Primary domain name for the website       |
+| Variable           | Description                               |
+| ------------------ | ----------------------------------------- |
+| `APP_NAME`         | Application name used as subdomain prefix |
+| `APP_DOMAIN`       | Domain name for the website               |
+| `APP_SUBDOMAIN`    | Subomain name for the website             |
+| `AWS_ACM_CERT_ARN` | AWS ACM certificate arn                   |
 
 - Key command:
 
@@ -134,7 +140,7 @@ terraform init \
 
 ### Resource Control
 
-Control Terraform operations using the `.terraform-action` file.
+Control Terraform operations using the `.terraform.ini` file.
 
 | File content | Description                             | Action Taken        |
 | ------------ | --------------------------------------- | ------------------- |

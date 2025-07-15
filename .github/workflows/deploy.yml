@@ -31,9 +31,11 @@ jobs:
       AWS_BACKEND_BUCKET: ${{ secrets.AWS_BACKEND_BUCKET }}
       AWS_BACKEND_BUCKET_KEY: ${{ secrets.AWS_BACKEND_BUCKET_KEY }}
 
-      TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
       TF_VAR_app_name: ${{ secrets.APP_NAME }}
-      TF_VAR_app_domain_name: ${{ secrets.APP_DOMAIN_NAME }}
+      TF_VAR_web_domain: ${{ secrets.APP_DOMAIN }}
+      TF_VAR_web_subdomain: ${{ secrets.APP_SUBDOMAIN }}
+      TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
+      TF_VAR_aws_acm_cert_arn: ${{ secrets.AWS_ACM_CERT_ARN }}
       TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       TF_VAR_cloudflare_zone_id: ${{ secrets.CLOUDFLARE_ZONE_ID }}
 
@@ -46,8 +48,8 @@ jobs:
         run: |
           pwd
           ls -al
-          if [ -f ".terraform-action" ]; then
-            ACTION=$(cat .terraform-action | tr -d '\n\r')
+          if [ -f ".terraform.ini" ]; then
+            ACTION=$(cat .terraform.ini | tr -d '\n\r')
             echo "action=$ACTION" >> $GITHUB_OUTPUT
           else
             echo "action=plan" >> $GITHUB_OUTPUT

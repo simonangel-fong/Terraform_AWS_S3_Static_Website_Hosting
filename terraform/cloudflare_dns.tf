@@ -4,8 +4,8 @@
 
 resource "cloudflare_record" "cf_record" {
   zone_id = var.cloudflare_zone_id
-  name    = "${var.app_name}.${var.app_domain_name}"
-  content = aws_s3_bucket_website_configuration.website_config.website_endpoint
+  name    = local.web_address
+  content = aws_cloudfront_distribution.cloudfront_distribution.domain_name # cloudfront domain
   type    = "CNAME"
 
   ttl     = 1

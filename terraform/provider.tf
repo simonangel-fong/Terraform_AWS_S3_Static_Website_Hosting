@@ -1,3 +1,6 @@
+# ########################################
+# Terraform providers
+# ########################################
 terraform {
   required_providers {
     aws = {
@@ -19,10 +22,12 @@ terraform {
   }
 }
 
+# aws configuration
 provider "aws" {
   region = var.aws_region
 }
 
+# cloudflare configuration
 provider "cloudflare" {
   api_token = var.cloudflare_api_token
 }

@@ -1,14 +1,14 @@
 # ########################################
-# Create bucket for static web host
+# AWS S3 bucket for static web host
 # ########################################
 
 resource "aws_s3_bucket" "web_host_bucket" {
-  #   bucket = "${var.app_domain_name}-${random_string.bucket_suffix.result}"
-  bucket = "${var.app_name}.${var.app_domain_name}"
+  #   bucket = "${var.app_name}-${random_string.bucket_suffix.result}" # with random string
+  bucket = local.web_address
 
   tags = {
-    # Name = "bucket-${var.app_domain_name}-${random_string.bucket_suffix.result}"
-    Name = "bucket-${var.app_domain_name}"
+    # Name = "bucket-${var.app_name}-${random_string.bucket_suffix.result}"
+    Name = "bucket-${var.app_name}"
   }
 }
 

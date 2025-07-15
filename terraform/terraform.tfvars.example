@@ -1,7 +1,10 @@
 # terraform.tfvars.example
 
-app_name             = "my_app"
-web_domain_name      = "my_domain"
-aws_region           = "my_region"
-cloudflare_api_token = "cloudfalre_token"
-cloudflare_zone_id   = "zone_id"
+app_name                = "my_app"
+web_domain              = "my_domain"
+web_subdomain           = "my_subdomain"
+aws_region              = "my_region"
+aws_acm_cert_arn        = "my_acm_cert_arn"
+cloudflare_api_token    = "cloudfalre_token"
+cloudflare_zone_id      = "zone_id"
+
