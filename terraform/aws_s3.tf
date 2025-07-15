@@ -122,3 +122,16 @@ resource "aws_s3_bucket_policy" "example" {
 
   depends_on = [aws_s3_bucket_public_access_block.bucket_public_access]
 }
+
+# ########################################
+# AWS S3 bucket for cloudfront logs
+# ########################################
+
+resource "aws_s3_bucket" "cloudfront_logs" {
+  # bucket = "${var.app_name}-cloudfront-logs-${random_id.bucket_suffix.hex}"
+  bucket = "${local.web_address}-cloudfront-logs"
+
+  tags = {
+    Name = "bucket-${var.app_name}-cloudfront-logs"
+  }
+}
