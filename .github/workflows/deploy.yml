@@ -1,4 +1,4 @@
-name: "Terraform Deploy"
+name: "Terraform: Static Web Hosting"
 
 on:
   push:
